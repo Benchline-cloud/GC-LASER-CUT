@@ -1,0 +1,18 @@
+{
+  "_how_to": "In Stripe Dashboard go to Product catalogue > Payment links > New. Create one link per product (or per size/design for products with options), enable 'Collect shipping address' and set shipping rates. Paste each link URL below, then run: node src/build.js. Products with no link show an 'Order this' button that opens the quote form instead.",
+  "artwork": { "small": "", "medium": "", "large": "" },
+  "collingwood-light": { "default": "" },
+  "custom-code-logo": { "default": "" },
+  "custom-engraved-dog-tags-personalized-pet-id-tags-durable-stylish": { "default": "" },
+  "custom-laser-cut-acrylic-qr-code-led-lit-sign-elegant-business-promotion": { "default": "" },
+  "custom-silk-screen-stencils-for-business-promotion-unique-and-elegant-marketing-tool": { "default": "" },
+  "elegant-arabic-calligraphy-led-light-lamp-custom-laser-cut-design": { "1": "", "2": "", "3": "", "4": "", "5": "" },
+  "elegant-handcrafted-geometric-mirror-modern-decorative-wall-mirror-for-living-room-bedroom-or-entryway": { "default": "" },
+  "handcrafted-wooden-moon-phase-bed-head-unique-bedroom-decor": { "default": "" },
+  "mirror": { "default": "" },
+  "multilayered-guitar-mirror-mandala-layered-wall-art-for-home-decor": { "default": "" },
+  "photo-frame-engraving": { "default": "" },
+  "premium-custom-laser-cut-stencils-for-art-design-diy-projects-precision-crafted-in-coomera": { "default": "" },
+  "wedding-invitations-2": { "default": "" },
+  "wooden-geometric-wall-clock-artisanal-home-decor": { "default": "" }
+}

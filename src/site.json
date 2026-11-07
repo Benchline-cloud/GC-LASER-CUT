@@ -1,0 +1,52 @@
+{
+  "url": "https://gclasercut.com",
+  "domain": "gclasercut.com",
+  "email": "gclasercutting@gmail.com",
+  "phoneDisplay": "0456 267 249",
+  "phoneE164": "+61456267249",
+  "gtmId": "",
+  "fbPixelId": "",
+  "social": [],
+  "areas": ["Coomera", "Pimpama", "Helensvale", "Oxenford", "Upper Coomera", "Ormeau", "Southport", "Nerang", "Robina", "Burleigh Heads", "Gold Coast", "Brisbane", "Australia"],
+  "faq": [
+    ["What materials does GC Laser Cut cut?", "MDF 3 to 12 mm, acrylic 2 to 10 mm, PVC-free vinyl, leather 1 to 5 mm, thin polycarbonate 1 to 3 mm and timber 3 to 18 mm. We do not cut metal of any kind."],
+    ["Do you cut metal?", "No. We do not cut steel, stainless, aluminium, brass, copper or any other metal. Our 130 W CO2 laser is built for sheet goods such as timber, MDF, acrylic and leather."],
+    ["What is the largest sheet you can cut?", "Up to 1300 by 900 mm in one piece. Larger designs are split into panels that join on assembly."],
+    ["What file formats do you accept?", "DXF, SVG, AI and PDF drawn at 1:1 scale in millimetres. A JPG or sketch is fine for a quote and we can redraw it for cutting."],
+    ["How long will my job take?", "Most jobs are ready in 3 to 5 working days from approval. Quotes are sent within 24 hours."],
+    ["How much does laser cutting cost?", "Machine time is $65 per hour plus a $20 setup fee for a new design. Complex designs add 15 percent and jobs over 10 hours receive 10 percent off. Material is quoted separately."],
+    ["Where are you located?", "Coomera, QLD 4209 on the northern Gold Coast. Pick-up by appointment or postage anywhere in Australia."]
+  ],
+  "categories": [
+    {"slug": "3d-mandala", "name": "3D Mandalas", "desc": "Multi-layer laser-cut timber mandalas from 30 to 80 cm, assembled and finished in Coomera."},
+    {"slug": "mirrors", "name": "Mirrors", "desc": "Decorative wall mirrors with laser-cut layered frames in timber and MDF."},
+    {"slug": "weddings", "name": "Weddings", "desc": "Laser-cut wedding invitations, pocket envelopes and engraved timber signage."},
+    {"slug": "photo-frame", "name": "Photo Frames", "desc": "Timber photo frames with engraved plaques and photo-engraved panels."},
+    {"slug": "stencil", "name": "Stencils", "desc": "Durable laser-cut stencils for art, business branding and silk-screen printing."},
+    {"slug": "led-lamps", "name": "LED Lamps", "desc": "Engraved acrylic lamps on timber LED bases, including calligraphy and custom designs."},
+    {"slug": "tags", "name": "QR Code Signs", "desc": "Laser-cut acrylic QR code signs and LED-lit counter displays for businesses."},
+    {"slug": "dog-tag", "name": "Dog Tags", "desc": "Custom engraved pet ID tags in ten colours, personalised and posted."},
+    {"slug": "business-products", "name": "Business Products", "desc": "QR code signs, branded stencils and promotional pieces for shops, cafes and offices."}
+  ],
+  "optionLabels": {
+    "attribute_design": {"1": "Design 1", "2": "Design 2", "3": "Design 3", "4": "Design 4", "5": "Design 5"},
+    "attribute_pa_size": {"small": "Small, 30 cm", "medium": "Medium, 50 cm", "large": "Large, 80 cm"}
+  },
+  "productTiles": {
+    "artwork": {"name": "3D Layered Mandala", "blurb": "Timber, 30 to 80 cm"},
+    "collingwood-light": {"name": "Collingwood LED Wall Light", "blurb": "Engraved acrylic, timber frame"},
+    "custom-code-logo": {"name": "Custom QR Code Logo", "blurb": "Branded QR code, laser cut"},
+    "custom-engraved-dog-tags-personalized-pet-id-tags-durable-stylish": {"name": "Engraved Dog Tags", "blurb": "Personalised pet ID, 10 colours"},
+    "custom-laser-cut-acrylic-qr-code-led-lit-sign-elegant-business-promotion": {"name": "Acrylic QR Code LED Sign", "blurb": "Counter-top, lit base"},
+    "custom-silk-screen-stencils-for-business-promotion-unique-and-elegant-marketing-tool": {"name": "Silk Screen Business Stencils", "blurb": "Logo stencils for printing and signage", "fallback": "/assets/s-stencils.jpg"},
+    "elegant-arabic-calligraphy-led-light-lamp-custom-laser-cut-design": {"name": "Calligraphy LED Lamp", "blurb": "Engraved acrylic on timber"},
+    "elegant-handcrafted-geometric-mirror-modern-decorative-wall-mirror-for-living-room-bedroom-or-entryway": {"name": "Geometric Wall Mirror", "blurb": "Round layered mirror"},
+    "handcrafted-wooden-moon-phase-bed-head-unique-bedroom-decor": {"name": "Moon Phase Bed Head", "blurb": "Timber bedroom feature"},
+    "mirror": {"name": "Bohemian Mirror Frame", "blurb": "Laser-cut layered frame"},
+    "multilayered-guitar-mirror-mandala-layered-wall-art-for-home-decor": {"name": "Guitar Mirror Mandala", "blurb": "Layered wall art"},
+    "photo-frame-engraving": {"name": "Engraved Photo Frame", "blurb": "Timber frame with engraved plaque"},
+    "premium-custom-laser-cut-stencils-for-art-design-diy-projects-precision-crafted-in-coomera": {"name": "Custom Laser-Cut Stencils", "blurb": "For art, design and DIY"},
+    "wedding-invitations-2": {"name": "Wedding Invitations", "blurb": "Laser-cut pocket and envelope"},
+    "wooden-geometric-wall-clock-artisanal-home-decor": {"name": "Geometric Wall Clock", "blurb": "Layered timber"}
+  }
+}
