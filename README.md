@@ -10,14 +10,13 @@ Everything in this repository root is the published site. The `src/` folder hold
 |---|---|
 | `index.html`, `about/`, `services/`, `pricing/`, `3d-signs/`, `layered-artwork/`, `contact-us/`, `privacy-policy/`, `terms-and-conditions/` | Site pages, at the same addresses the old site used |
 | `blog/` and one folder per post, e.g. `acrylic-sheets-for-laser-cutting/` | The 12 guides, at their original addresses |
-| `shop/`, `product/<slug>/`, `product-category/<slug>/` | Shop index, 15 product pages, 9 category pages |
+| `shop/`, `product/<slug>/`, `product-category/<slug>/` | Redirects from the old shop addresses to the work gallery |
 | `assets/` | Logo, photos, `site.css`, `site.js` |
 | `404.html`, `sitemap.xml`, `robots.txt`, `CNAME`, `.nojekyll` | Hosting files |
 | `src/build.js` | Generator. Run it after any change in `src/` |
 | `src/home.html` | Home page source |
-| `src/content.json` | Text of every post, page and product |
+| `src/content.json` | Text of every post and page (product entries are kept only to generate redirects) |
 | `src/site.json` | Contact details, categories, FAQ, tracking IDs, social links |
-| `src/stripe-links.json` | Stripe Payment Link per product |
 | `src/pages.css` | Styles for inner pages (home page styles live in `src/home.html`) |
 
 ## One-time setup
@@ -68,19 +67,7 @@ The form opens the visitor's mail app by default. To receive submissions directl
 3. Paste it into `FORM_ENDPOINT` at the top of `assets/site.js`.
 4. Commit and push.
 
-### 5. Stripe payments
-
-Each product shows **Order this** until it has a Stripe Payment Link. To take card payments:
-
-1. In the Stripe Dashboard open **Product catalogue → Payment links → New link**.
-2. Create the product with its price. For products with options (mandala sizes, lamp designs) make one link per option.
-3. Under Options turn on **Collect customers' addresses → Shipping** and add your shipping rates. Set the currency to AUD.
-4. Copy the link and paste it into `src/stripe-links.json` next to the matching product slug (and option key where there is one).
-5. Run `node src/build.js`, commit and push. The button changes to **Buy now with card**.
-
-Stripe emails you and the customer on each payment. Stripe's own dashboard is the order list.
-
-### 6. Tracking and social links (optional)
+### 5. Tracking and social links (optional)
 
 In `src/site.json` fill in `gtmId` (Google Tag Manager, `GTM-XXXXXXX`), `fbPixelId`, and `social` as a list like `[{"name":"Instagram","url":"https://instagram.com/..."}]`. Rebuild and push.
 
@@ -89,7 +76,6 @@ In `src/site.json` fill in `gtmId` (Google Tag Manager, `GTM-XXXXXXX`), `fbPixel
 - **Prices, titles, descriptions**: edit `src/content.json` or `src/site.json`, then run `node src/build.js`.
 - **Home page text**: edit `src/home.html`, then build.
 - **A new guide**: add an entry to `posts` in `src/content.json` with `slug`, `title`, `date` (YYYY-MM-DD), `desc`, `cover` (path under `/assets/posts/`) and `html`, then build.
-- **A new product**: add an entry to `products` in `src/content.json` and a tile entry in `src/site.json`, drop photos into `assets/products/`, then build.
 - **Publish**: `git add -A && git commit -m "Update" && git push`. GitHub Pages redeploys in about a minute.
 
 Building needs Node.js 18 or newer, nothing else.
@@ -98,8 +84,7 @@ Building needs Node.js 18 or newer, nothing else.
 
 1. Push the repo and enable Pages.
 2. Set up Formspree and send a test quote.
-3. Create Stripe links and test one purchase in Stripe test mode.
-4. Export a backup of WordPress (Tools → Export) and the WooCommerce orders.
-5. Change the DNS records. Confirm https://gclasercut.com loads the new site.
-6. In Google Search Console, submit `https://gclasercut.com/sitemap.xml`.
-7. After 30 days, cancel Hostinger hosting (keep the domain and email), Elementor Pro and any unused payment gateways.
+3. Export a backup of WordPress (Tools → Export) and the WooCommerce orders.
+4. Change the DNS records. Confirm https://gclasercut.com loads the new site.
+5. In Google Search Console, submit `https://gclasercut.com/sitemap.xml`.
+6. After 30 days, cancel Hostinger hosting (keep the domain and email), Elementor Pro, WooCommerce Payments and every payment gateway account you no longer need.

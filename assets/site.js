@@ -18,22 +18,6 @@
     });
   });
 
-  // product page: variant select and gallery
-  var sel=document.getElementById('variant'),buyBtn=document.getElementById('buyBtn'),price=document.getElementById('price'),buy=document.querySelector('.buy');
-  if(sel&&buyBtn){
-    sel.addEventListener('change',function(){
-      var o=sel.options[sel.selectedIndex];
-      price.textContent='$'+(Number(o.dataset.price)%1?Number(o.dataset.price).toFixed(2):Number(o.dataset.price).toFixed(0));
-      var link=o.dataset.link||buy.dataset.default;
-      buyBtn.href=link||buy.dataset.order;
-      buyBtn.textContent=link?'Buy now with card':'Order this';
-    });
-  }
-  var main=document.getElementById('mainImg');
-  document.querySelectorAll('.thumbs button').forEach(function(b){
-    b.addEventListener('click',function(){main.src=b.dataset.src;document.querySelectorAll('.thumbs button').forEach(function(x){x.classList.remove('on');});b.classList.add('on');});
-  });
-
   // quote form
   var f=document.getElementById('quoteForm');
   if(f){
