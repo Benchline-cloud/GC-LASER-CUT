@@ -6,6 +6,13 @@
   // and the drag-and-drop field appears on the contact page; false shows an email note instead.
   var FILE_UPLOADS = false;
 
+  // scorched underline draws under section headings as they scroll into view
+  if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.documentElement.classList.add('kerf-ready');
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.6});
+    document.querySelectorAll('section > .wrap > h2, .about-grid h2').forEach(function(x){io.observe(x);});
+  }
+
   var btn=document.getElementById('menuBtn'),nav=document.getElementById('mainNav');
   if(btn&&nav){
     btn.addEventListener('click',function(){var o=nav.classList.toggle('open');btn.setAttribute('aria-expanded',o);});

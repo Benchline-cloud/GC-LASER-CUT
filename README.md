@@ -76,6 +76,10 @@ Formspree only accepts attachments on a paid plan (Personal or above), so the fi
 
 Treat attachments as untrusted: open DXF, SVG and AI files in your CAD or drawing software, never by double-clicking in a browser.
 
+## Motion
+
+The home page has a few animations: a laser that cuts a snowflake across the hero photo (pure SVG, no script), a scorched line that draws under section headings as they scroll into view, material swatches that settle in and glow on hover, and work tiles that lift on hover. All of it is disabled automatically for visitors who have "reduce motion" switched on in their device settings. To remove any of it, delete the matching block in the `<style>` of `src/home.html` and rebuild.
+
 ## Security notes
 
 - Static files only: no database, no server code, no logins, so there is nothing for SQL injection or credential theft to target.

@@ -55,6 +55,16 @@
       </div>
       <figure class="hero-photo">
         <img src="/assets/hero.jpg" alt="CO2 laser head cutting snowflake shapes from plywood" width="1000" height="625">
+        <svg class="laser" viewBox="0 0 1000 625" aria-hidden="true" focusable="false">
+          <defs>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <filter id="glow2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+          </defs>
+          <path id="cutpath" d="M150 470 L230 410 L205 360 L260 345 L300 290 L340 345 L395 360 L370 410 L450 470 L370 530 L395 580 L340 565 L300 620 L260 565 L205 580 L230 530 Z" fill="none" stroke="rgba(255,255,255,0)" />
+          <path class="kerf-line" d="M150 470 L230 410 L205 360 L260 345 L300 290 L340 345 L395 360 L370 410 L450 470 L370 530 L395 580 L340 565 L300 620 L260 565 L205 580 L230 530 Z" fill="none" stroke="#ffc27a" stroke-width="3.5" stroke-linejoin="round" pathLength="1" />
+          <circle class="laser-halo" r="24" fill="#ff7a1a" opacity=".55" filter="url(#glow2)"><animateMotion dur="7s" repeatCount="indefinite" rotate="auto"><mpath href="#cutpath"/></animateMotion></circle>
+          <circle class="laser-dot" r="6" fill="#fff6e8" filter="url(#glow)"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#cutpath"/></animateMotion></circle>
+        </svg>
         <figcaption>Plywood snowflakes coming off the 130 W CO2 laser.</figcaption>
       </figure>
     </div>
