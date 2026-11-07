@@ -186,6 +186,7 @@ table.price small{display:block;color:var(--muted);font-weight:400;font-size:.88
 .cdetails .v a.map{font-family:var(--body);font-weight:500;font-size:.9rem;color:var(--ink-muted);text-decoration:underline;margin-left:.6rem}
 .copy{margin-left:.6rem;font:inherit;font-size:.78rem;font-weight:600;background:transparent;color:inherit;border:1px solid #5a564f;border-radius:3px;padding:.15rem .5rem;cursor:pointer;vertical-align:middle}
 form{display:grid;gap:.9rem}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .field{display:grid;gap:.3rem}
 label{font-size:.85rem;font-weight:600;color:var(--ink-muted)}
 input,textarea,select{font:inherit;padding:.7rem .8rem;border-radius:4px;border:1px solid #5a564f;background:#2a2926;color:var(--ink-fg);width:100%;min-width:0;color-scheme:dark}
@@ -513,6 +514,7 @@ footer .legal{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--ink-li
       </ul>
     </div>
     <form id="quoteForm" novalidate>
+      <input type="text" name="_gotcha" id="qGotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
       <div class="row2">
         <div class="field"><label for="qName">Name</label><input id="qName" name="name" required autocomplete="name"></div>
         <div class="field"><label for="qEmail">Email</label><input id="qEmail" name="email" type="email" required autocomplete="email"></div>

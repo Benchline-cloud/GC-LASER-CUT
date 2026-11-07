@@ -25,6 +25,7 @@
     try{var pre=new URLSearchParams(location.search).get('product');if(pre&&f.message){f.message.value='I would like to order: '+pre+'\n\nQuantity: \nAny changes or personalisation: ';}}catch(_){}
     f.addEventListener('submit',function(e){
       e.preventDefault();
+      if(f._gotcha&&f._gotcha.value){return;}
       var name=f.name.value.trim(),email=f.email.value.trim(),msg=f.message.value.trim();
       if(!name||!email||!msg){[f.name,f.email,f.message].some(function(x){if(!x.value.trim()){x.focus();return true;}});return;}
       var material=f.material.value,thk=f.thickness.value||'not sure';
@@ -40,7 +41,7 @@
       if(!FORM_ENDPOINT){showFallback();return;}
       submit.disabled=true;submit.textContent='Sending';
       fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},
-        body:JSON.stringify({name:name,email:email,material:material,thickness:thk,message:msg,_subject:subject})})
+        body:JSON.stringify({name:name,email:email,material:material,thickness:thk,message:msg,_subject:subject,_gotcha:''})})
       .then(function(r){if(!r.ok)throw new Error('send failed');
         document.getElementById('sentTitle').textContent='Sent.';
         document.getElementById('sentBody').textContent='Thanks '+name+', we will reply to '+email+' within 24 hours.';

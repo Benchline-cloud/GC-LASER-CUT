@@ -3,7 +3,7 @@
 // Reads src/home.html, src/content.json, src/site.json
 // Writes every page into the repository root, ready for GitHub Pages.
 const fs = require('fs'), path = require('path');
-const ROOT = path.join(__dirname, '..');
+const ROOT = path.join(__dirname, '..', 'docs'); // GitHub Pages publishes from /docs; src/ and README stay private to the repo
 const SITE = JSON.parse(fs.readFileSync(path.join(__dirname, 'site.json'), 'utf8'));
 const C = JSON.parse(fs.readFileSync(path.join(__dirname, 'content.json'), 'utf8'));
 const HOME_SRC = fs.readFileSync(path.join(__dirname, 'home.html'), 'utf8');
@@ -18,6 +18,9 @@ const localise = html => html
   .replace(/https?:\/\/gclasercut\.com\//g, '/')
   .replace(/href="\/#/g, 'href="/#');
 
+// ---------- assets ----------
+fs.mkdirSync(path.join(ROOT, 'assets'), { recursive: true });
+fs.cpSync(path.join(__dirname, '..', 'assets'), path.join(ROOT, 'assets'), { recursive: true });
 // ---------- shared chrome ----------
 const css = HOME_SRC.match(/<style>([\s\S]*?)<\/style>/)[1];
 const extraCss = fs.readFileSync(path.join(__dirname, 'pages.css'), 'utf8');
@@ -76,6 +79,16 @@ const tracking = (SITE.gtmId ? `<!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${SITE.gtmId}');</script>` : '') +
   (SITE.fbPixelId ? `\n<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${SITE.fbPixelId}');fbq('track','PageView');</script>` : '');
 
+const csp = [
+  "default-src 'self'",
+  "script-src 'self'" + (SITE.gtmId ? " 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com" : '') + (SITE.fbPixelId ? " 'unsafe-inline' https://connect.facebook.net" : ''),
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src https://fonts.gstatic.com",
+  "img-src 'self' data:" + (SITE.gtmId ? ' https://www.google-analytics.com https://www.googletagmanager.com' : '') + (SITE.fbPixelId ? ' https://www.facebook.com' : ''),
+  "connect-src 'self' https://formspree.io" + (SITE.gtmId ? ' https://www.google-analytics.com https://www.googletagmanager.com' : '') + (SITE.fbPixelId ? ' https://www.facebook.com' : ''),
+  "form-action 'self' https://formspree.io",
+  "base-uri 'self'", "object-src 'none'", "frame-src 'none'", "upgrade-insecure-requests"
+].join('; ');
 function layout({ title, desc, path: p, body, image, schema, noindex }) {
   const url = BASE + p;
   return `<!doctype html>
@@ -95,6 +108,8 @@ ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <meta property="og:url" content="${url}">
 <meta property="og:image" content="${BASE}${image || '/assets/g-clock.jpg'}">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="${csp}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&display=swap">
 <link rel="stylesheet" href="/assets/site.css">
