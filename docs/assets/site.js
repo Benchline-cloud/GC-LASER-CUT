@@ -6,6 +6,64 @@
   // and the drag-and-drop field appears on the contact page; false shows an email note instead.
   var FILE_UPLOADS = false;
 
+  // background laser: scores geometric outlines into the dark hero surface, one shape at a time
+  (function(){
+    var c=document.getElementById('bgLaser');
+    if(!c||!c.getContext||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    var ctx=c.getContext('2d'),W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,2);
+    var scar=document.createElement('canvas'),sctx=scar.getContext('2d'); // persistent scorched lines
+    function size(){var r=c.getBoundingClientRect();W=Math.max(1,Math.round(r.width));H=Math.max(1,Math.round(r.height));
+      c.width=scar.width=W*dpr;c.height=scar.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);sctx.setTransform(dpr,0,0,dpr,0,0);sctx.clearRect(0,0,W,H);}
+    size();window.addEventListener('resize',size);
+    // a family of laser-cut outlines: snowflake, gear, mandala petal ring
+    function shape(cx,cy,r,kind){
+      var pts=[],n,i,a,rr;
+      if(kind===0){n=12;for(i=0;i<=n*2;i++){a=i*Math.PI/n;rr=i%2?r*.45:r;if(i%4===1)rr=r*.62;pts.push([cx+Math.cos(a)*rr,cy+Math.sin(a)*rr]);}}
+      else if(kind===1){n=14;for(i=0;i<=n*4;i++){a=i*Math.PI/(n*2);rr=(i%4<2)?r:r*.8;pts.push([cx+Math.cos(a)*rr,cy+Math.sin(a)*rr]);}}
+      else{n=8;for(i=0;i<=n*6;i++){a=i*Math.PI/(n*3);var k=i%6;rr=k===0?r*.55:(k===3?r:r*.78);pts.push([cx+Math.cos(a)*rr,cy+Math.sin(a)*rr]);}}
+      return pts;
+    }
+    var path=[],seg=0,t=0,speed=0,kind=0,restUntil=0,fading=false,lastTs=0;
+    function newShape(){
+      kind=(kind+1)%3;
+      var r=Math.min(W,H)*(0.22+Math.random()*0.14);
+      var cx=r+Math.random()*(W-2*r),cy=r*0.9+Math.random()*Math.max(1,H-1.8*r);
+      path=shape(cx,cy,r,kind);seg=0;t=0;
+      var len=0;for(var i=1;i<path.length;i++)len+=Math.hypot(path[i][0]-path[i-1][0],path[i][1]-path[i-1][1]);
+      speed=len/9000; // px per ms: each outline takes about 9 seconds
+    }
+    newShape();
+    function frame(ts){
+      requestAnimationFrame(frame);
+      if(document.hidden)return;
+      var dt=lastTs?Math.min(50,ts-lastTs):16;lastTs=ts;
+      if(ts<restUntil){draw(null);return;}
+      if(fading){sctx.globalCompositeOperation='destination-out';sctx.fillStyle='rgba(0,0,0,.06)';sctx.fillRect(0,0,W,H);sctx.globalCompositeOperation='source-over';
+        if((fading-=dt)<=0){fading=false;sctx.clearRect(0,0,W,H);newShape();}draw(null);return;}
+      var a=path[seg],b=path[seg+1];
+      var L=Math.hypot(b[0]-a[0],b[1]-a[1]);t+=speed*dt;
+      while(t>=L){
+        sctx.strokeStyle='rgba(255,170,90,.55)';sctx.lineWidth=1.4;sctx.lineCap='round';sctx.beginPath();sctx.moveTo(a[0],a[1]);sctx.lineTo(b[0],b[1]);sctx.stroke();
+        t-=L;seg++;
+        if(seg>=path.length-1){restUntil=ts+1800;fading=2200;draw(null);return;}
+        a=path[seg];b=path[seg+1];L=Math.hypot(b[0]-a[0],b[1]-a[1]);
+      }
+      var k=t/L,x=a[0]+(b[0]-a[0])*k,y=a[1]+(b[1]-a[1])*k;
+      sctx.strokeStyle='rgba(255,170,90,.55)';sctx.lineWidth=1.4;sctx.beginPath();sctx.moveTo(a[0],a[1]);sctx.lineTo(x,y);sctx.stroke();
+      draw([x,y]);
+    }
+    function draw(head){
+      ctx.clearRect(0,0,W,H);
+      ctx.drawImage(scar,0,0,W,H);
+      if(!head)return;
+      var g=ctx.createRadialGradient(head[0],head[1],0,head[0],head[1],26);
+      g.addColorStop(0,'rgba(255,200,140,.95)');g.addColorStop(.25,'rgba(255,120,40,.55)');g.addColorStop(1,'rgba(255,100,20,0)');
+      ctx.fillStyle=g;ctx.beginPath();ctx.arc(head[0],head[1],26,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='#fff6e8';ctx.beginPath();ctx.arc(head[0],head[1],2.2,0,Math.PI*2);ctx.fill();
+    }
+    requestAnimationFrame(frame);
+  })();
+
   // scorched underline draws under section headings as they scroll into view
   if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     document.documentElement.classList.add('kerf-ready');

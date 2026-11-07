@@ -78,7 +78,7 @@ Treat attachments as untrusted: open DXF, SVG and AI files in your CAD or drawin
 
 ## Motion
 
-The home page has a few animations: a laser that cuts a snowflake across the hero photo (pure SVG, no script), a scorched line that draws under section headings as they scroll into view, material swatches that settle in and glow on hover, and work tiles that lift on hover. All of it is disabled automatically for visitors who have "reduce motion" switched on in their device settings. To remove any of it, delete the matching block in the `<style>` of `src/home.html` and rebuild.
+The site is a single dark theme. The home page has a few animations: a laser that scores geometric outlines (snowflake, gear, petal ring) into the dark background behind the hero, one shape at a time, then lets them fade; a scorched line that draws under section headings as they scroll into view; material swatches that settle in and glow on hover; and work tiles that lift on hover. All of it is disabled automatically for visitors who have "reduce motion" switched on. The background laser is the block starting "background laser" in `assets/site.js`; the rest lives in the `<style>` of `src/home.html`.
 
 ## Security notes
 
