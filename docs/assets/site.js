@@ -2,6 +2,9 @@
   // Set this to your Formspree endpoint, e.g. "https://formspree.io/f/abcdwxyz", to send quote requests directly.
   // Leave empty and the form opens the visitor's mail app instead.
   var FORM_ENDPOINT = "https://formspree.io/f/mrppvkjp";
+  // Formspree only accepts file attachments on a paid plan. Set this to true after upgrading
+  // and the drag-and-drop field appears on the contact page; false shows an email note instead.
+  var FILE_UPLOADS = false;
 
   var btn=document.getElementById('menuBtn'),nav=document.getElementById('mainNav');
   if(btn&&nav){
@@ -68,6 +71,12 @@
         if(chosen.some(function(c){return c.name===file.name&&c.size===file.size;})){return next();}
         sniff(file).then(function(v){ if(!v.ok){showErr(file.name+' '+v.why+'.');} else {chosen.push(file);} next(); });
       })();
+    }
+    var fileField=drop?drop.parentNode:null;
+    if(fileField&&!FILE_UPLOADS){
+      var note=document.createElement("p");note.className="formnote";note.id="fileNote";
+      note.textContent="Have a cutting file? Send this form first, then reply to our confirmation email with your DXF, SVG, AI or PDF attached.";
+      fileField.replaceWith(note);drop=null;fileInput=null;
     }
     if(drop&&fileInput){
       fileInput.addEventListener('change',function(){addFiles(fileInput.files);fileInput.value='';});
