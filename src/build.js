@@ -55,7 +55,7 @@ const footer = `<footer>
       <div><h3>Site</h3><ul>
         <li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/services/">Services</a></li>
         <li><a href="/3d-signs/">3D Signs</a></li><li><a href="/layered-artwork/">Layered Artwork</a></li>
-        <li><a href="/pricing/">Pricing</a></li><li><a href="/blog/">Blog and guides</a></li><li><a href="/contact-us/">Contact</a></li>
+        <li><a href="/pricing/">Pricing</a></li><li><a href="/blog/">Blog and guides</a></li><li><a href="/contact-us/">Contact</a></li><li><a href="/whats-new/">What's new</a></li>
       </ul></div>
       <div><h3>Materials</h3><ul>
         <li><a href="/#materials">MDF, 3 to 12 mm</a></li><li><a href="/#materials">Acrylic, 2 to 10 mm</a></li><li><a href="/#materials">Vinyl, PVC-free</a></li>
@@ -89,6 +89,7 @@ const csp = [
   "form-action 'self' https://formspree.io",
   "base-uri 'self'", "object-src 'none'", "frame-src 'none'", "upgrade-insecure-requests"
 ].join('; ');
+const banner = `<div class="notice" id="siteNotice" hidden><div class="wrap"><p><strong>Same GC Laser Cut, new website.</strong> We rebuilt gclasercut.com in November 2026. Same workshop, phone and email. <a href="/whats-new/">See what changed</a></p><button type="button" id="noticeClose" aria-label="Dismiss">Got it</button></div></div>`;
 function layout({ title, desc, path: p, body, image, schema, noindex }) {
   const url = BASE + p;
   return `<!doctype html>
@@ -118,6 +119,7 @@ ${tracking}
 </head>
 <body>
 ${header}
+${banner}
 <main id="top">
 ${body}
 </main>
@@ -239,15 +241,42 @@ for (const p of posts) {
 write('iron-laser-cutting-designs/index.html', `<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=/#materials"><link rel="canonical" href="${BASE}/#materials"><meta name="robots" content="noindex"><title>Redirecting</title><p>This post has been removed. GC Laser Cut does not cut metal. <a href="/#materials">See the materials we cut</a>.</p>`);
 
 // ---------- old shop addresses redirect to the work gallery ----------
-const redirect = (rel, to) => write(rel, `<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=${to}"><link rel="canonical" href="${BASE}${to}"><meta name="robots" content="noindex"><title>Redirecting</title><p>We no longer sell ready-made products online. <a href="${to}">See our recent work</a> and ask for a custom piece.</p>`);
-for (const rel of ['shop', 'basket', 'checkout']) redirect(rel + '/index.html', '/#work');
-redirect('my-account/index.html', '/#contact');
-for (const pr of C.products) redirect(`product/${pr.slug}/index.html`, '/#work');
-for (const slug of ['3d-mandala', 'mirrors', 'weddings', 'photo-frame', 'stencil', 'led-lamps', 'tags', 'dog-tag', 'business-products', 'uncategorised']) redirect(`product-category/${slug}/index.html`, '/#work');
+const redirect = (rel, to) => write(rel, `<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=${to}"><link rel="canonical" href="${BASE}${to}"><meta name="robots" content="noindex"><title>Redirecting</title><p>This is still GC Laser Cut. The online shop has closed and everything is now made to order. <a href="${to}">See what changed</a>.</p>`);
+for (const rel of ['shop', 'basket', 'checkout']) redirect(rel + '/index.html', '/whats-new/');
+redirect('my-account/index.html', '/whats-new/');
+for (const pr of C.products) redirect(`product/${pr.slug}/index.html`, '/whats-new/');
+for (const slug of ['3d-mandala', 'mirrors', 'weddings', 'photo-frame', 'stencil', 'led-lamps', 'tags', 'dog-tag', 'business-products', 'uncategorised']) redirect(`product-category/${slug}/index.html`, '/whats-new/');
+
+// ---------- what's new ----------
+{
+  const inner = `
+  <p>If you have used us before, this site will look different from the one you remember. It is still GC Laser Cut, the same workshop in Coomera, the same 130 W CO2 laser, the same phone number and email. We rebuilt the website in November 2026 and this page explains what changed.</p>
+  <h2>What is the same</h2>
+  <ul>
+    <li>Same business, same people, same workshop in Coomera QLD 4209.</li>
+    <li>Same phone, ${SITE.phoneDisplay}, and same email, ${SITE.email}.</li>
+    <li>Same materials: MDF, acrylic, vinyl, leather, thin polycarbonate and timber. Still no metal.</li>
+    <li>Same pricing: $65 an hour of machine time, $20 setup for a new design.</li>
+    <li>Every guide from the old blog is still here at the same web address.</li>
+  </ul>
+  <h2>What changed</h2>
+  <ul>
+    <li><strong>No online shop.</strong> We no longer sell ready-made products through the site. Everything is made to order. Browse <a href="/#work">our recent work</a>, then <a href="/contact-us/">ask for a quote</a> and we will make yours.</li>
+    <li><strong>A clearer materials list.</strong> Thicknesses for every material and a plain statement that we do not cut metal, so nobody wastes an email.</li>
+    <li><strong>A new quote form</strong> that confirms on the page and reaches us within seconds.</li>
+    <li><strong>Faster and safer.</strong> The old site ran on WordPress with a dozen plugins. This one is plain pages served from GitHub, so it loads in under a second and has nothing to hack.</li>
+    <li><strong>A new look.</strong> Dark workshop theme, our real work in the gallery, and a small laser that scores patterns into the background while you read.</li>
+  </ul>
+  <h2>Had an order or account on the old site?</h2>
+  <p>Old product pages, the basket and the account area now redirect here. If you had an order in progress or need a copy of a past invoice, email ${SITE.email} with your name and roughly when you ordered, and we will dig it out of the old records.</p>
+  <h2>Something missing?</h2>
+  <p>If you came looking for a page or product that is not here, <a href="/contact-us/">tell us</a>. Most of the old content was folded into the pages above, and we can point you to it.</p>`;
+  write('whats-new/index.html', layout({ title: "What's new on the GC Laser Cut website", desc: 'Same Coomera laser cutting workshop, new website. What stayed the same, what changed, and what to do if you had an order on the old site.', path: '/whats-new/', body: pageShell("Same workshop, new website", 'What changed on gclasercut.com in November 2026, and what did not.', inner + cta('Need something cut?', 'Send a file or a photo of something similar and we will quote it within 24 hours.'), [['Home', '/'], ["What's new", '/whats-new/']]), schema: [crumbs([['Home', '/'], ["What's new", '/whats-new/']])] }));
+}
 
 // ---------- misc ----------
 write('404.html', layout({ title: 'Page not found | GC Laser Cut', desc: 'That page does not exist.', path: '/404.html', noindex: true, body: `<section class="page"><div class="wrap narrow"><h1>That page is not here.</h1><p class="lede">It may have moved when we rebuilt the site. Try one of these.</p><ul class="biglinks"><li><a href="/">Home</a></li><li><a href="/#materials">Materials we cut</a></li><li><a href="/#work">Our work</a></li><li><a href="/blog/">Guides</a></li><li><a href="/contact-us/">Get a quote</a></li></ul></div></section>` }));
-const urls = ['/', '/about/', '/services/', '/pricing/', '/3d-signs/', '/layered-artwork/', '/contact-us/', '/privacy-policy/', '/terms-and-conditions/', '/blog/', ...posts.map(p => '/' + p.slug + '/')];
+const urls = ['/', '/whats-new/', '/about/', '/services/', '/pricing/', '/3d-signs/', '/layered-artwork/', '/contact-us/', '/privacy-policy/', '/terms-and-conditions/', '/blog/', ...posts.map(p => '/' + p.slug + '/')];
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `<url><loc>${BASE}${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 write('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${BASE}/sitemap.xml\n`);
 write('CNAME', SITE.domain + '\n');

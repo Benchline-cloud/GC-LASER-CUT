@@ -80,6 +80,10 @@ Treat attachments as untrusted: open DXF, SVG and AI files in your CAD or drawin
 
 The site is a single dark theme. The home page has a few animations: a laser that scores geometric outlines (snowflake, gear, petal ring) into the dark background behind the hero, one shape at a time, then lets them fade; a scorched line that draws under section headings as they scroll into view; material swatches that settle in and glow on hover; and work tiles that lift on hover. All of it is disabled automatically for visitors who have "reduce motion" switched on. The background laser is the block starting "background laser" in `assets/site.js`; the rest lives in the `<style>` of `src/home.html`.
 
+## Returning-visitor notice
+
+Every page shows an orange bar once per browser saying the site was rebuilt, linking to `/whats-new/`. It is dismissed with "Got it" and remembered in the visitor's browser. To retire it later, delete the `banner` line in `src/build.js` and rebuild. To show it again to everyone after a future change, bump the key `gc-notice-v1` in `assets/site.js`.
+
 ## Security notes
 
 - Static files only: no database, no server code, no logins, so there is nothing for SQL injection or credential theft to target.

@@ -6,6 +6,17 @@
   // and the drag-and-drop field appears on the contact page; false shows an email note instead.
   var FILE_UPLOADS = false;
 
+  // returning-visitor notice: shown until dismissed, remembered in this browser; never shown on the What's new page itself
+  (function(){
+    var n=document.getElementById('siteNotice'),x=document.getElementById('noticeClose');
+    if(!n||!x)return;
+    var seen=false;try{seen=localStorage.getItem('gc-notice-v1')==='1';}catch(_){}
+    if(seen||location.pathname.indexOf('/whats-new')===0)return;
+    n.hidden=false;
+    x.addEventListener('click',function(){n.hidden=true;try{localStorage.setItem('gc-notice-v1','1');}catch(_){}});
+    n.addEventListener('click',function(e){if(e.target.tagName==='A'){try{localStorage.setItem('gc-notice-v1','1');}catch(_){}}});
+  })();
+
   // background laser: scores geometric outlines into the dark hero surface, one shape at a time
   (function(){
     var c=document.getElementById('bgLaser');
