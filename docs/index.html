@@ -306,7 +306,17 @@
           </select></div>
         <div class="field"><label for="qThk">Thickness (mm)</label><input id="qThk" name="thickness" inputmode="decimal" placeholder="e.g. 6"></div>
       </div>
-      <div class="field"><label for="qMsg">What do you need?</label><textarea id="qMsg" name="message" required placeholder="Quantity, size, finish, deadline. Attach your file when you email us."></textarea></div>
+      <div class="field"><label for="qMsg">What do you need?</label><textarea id="qMsg" name="message" required placeholder="Quantity, size, finish, deadline."></textarea></div>
+      <div class="field">
+        <label for="qFiles">Your cutting file (optional)</label>
+        <div class="drop" id="drop" tabindex="0" role="button" aria-describedby="dropHelp">
+          <input type="file" id="qFiles" accept=".dxf,.svg,.ai,.pdf" multiple>
+          <strong>Drag and drop files here, or click to choose</strong>
+          <span id="dropHelp">DXF, SVG, AI or PDF. Up to 5 files, 25 MB each. Drawn at 1:1 in millimetres.</span>
+        </div>
+        <ul class="files" id="fileList" aria-live="polite"></ul>
+        <p class="formnote" id="fileError" role="alert" hidden></p>
+      </div>
       <button class="btn primary" type="submit" id="qSubmit">Send quote request</button>
       <p class="formnote" id="formNote">We reply to the email address above within 24 hours.</p>
       <div class="sent" id="sent">

@@ -68,6 +68,14 @@ The form posts to Formspree (form `mrppvkjp`, account gclasercutting@gmail.com).
 
 In `src/site.json` fill in `gtmId` (Google Tag Manager, `GTM-XXXXXXX`), `fbPixelId`, and `social` as a list like `[{"name":"Instagram","url":"https://instagram.com/..."}]`. Rebuild and push.
 
+## File uploads on the quote form
+
+The contact page has a drag-and-drop field for DXF, SVG, AI and PDF files. The browser checks each file before it is sent: extension allowlist, first bytes must match the claimed type, SVGs with scripting are refused, 25 MB per file, 5 files per request.
+
+Formspree only accepts attachments on a paid plan (Personal or above). On the free plan the site sends the message without the file and asks the visitor to reply with it. Upgrade the plan and attachments start arriving with no code change.
+
+Treat attachments as untrusted: open DXF, SVG and AI files in your CAD or drawing software, never by double-clicking in a browser.
+
 ## Security notes
 
 - Static files only: no database, no server code, no logins, so there is nothing for SQL injection or credential theft to target.

@@ -183,6 +183,17 @@ table.price small{display:block;color:var(--muted);font-weight:400;font-size:.88
 .copy{margin-left:.6rem;font:inherit;font-size:.78rem;font-weight:600;background:transparent;color:inherit;border:1px solid #5a564f;border-radius:3px;padding:.15rem .5rem;cursor:pointer;vertical-align:middle}
 form{display:grid;gap:.9rem}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.drop{position:relative;border:2px dashed #5a564f;border-radius:6px;padding:1.1rem 1rem;text-align:center;cursor:pointer;background:rgba(255,255,255,.03);display:grid;gap:.3rem}
+.drop strong{font-size:.95rem}
+.drop span{font-size:.82rem;color:var(--ink-muted)}
+.drop.over{border-color:var(--accent);background:rgba(224,112,47,.12)}
+.drop input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.files{list-style:none;margin:0;padding:0;display:grid;gap:.4rem;font-size:.9rem}
+.files li{display:flex;align-items:center;gap:.6rem;padding:.45rem .7rem;border:1px solid #5a564f;border-radius:4px;background:#2a2926}
+.files li span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.files li small{color:var(--ink-muted);font-variant-numeric:tabular-nums}
+.files li button{font:inherit;font-size:.78rem;background:none;border:1px solid #5a564f;color:inherit;border-radius:3px;padding:.1rem .5rem;cursor:pointer}
+#fileError{color:#f08a8a}
 .field{display:grid;gap:.3rem}
 label{font-size:.85rem;font-weight:600;color:var(--ink-muted)}
 input,textarea,select{font:inherit;padding:.7rem .8rem;border-radius:4px;border:1px solid #5a564f;background:#2a2926;color:var(--ink-fg);width:100%;min-width:0;color-scheme:dark}
