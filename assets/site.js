@@ -1,7 +1,7 @@
 (function(){
   // Set this to your Formspree endpoint, e.g. "https://formspree.io/f/abcdwxyz", to send quote requests directly.
   // Leave empty and the form opens the visitor's mail app instead.
-  var FORM_ENDPOINT = "";
+  var FORM_ENDPOINT = "https://formspree.io/f/mrppvkjp";
 
   var btn=document.getElementById('menuBtn'),nav=document.getElementById('mainNav');
   if(btn&&nav){

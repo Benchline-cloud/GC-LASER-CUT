@@ -60,7 +60,7 @@ Propagation usually takes under an hour. The old WordPress site keeps serving un
 
 ### 4. Quote form
 
-The form opens the visitor's mail app by default. To receive submissions directly:
+The form posts to Formspree (form `mrppvkjp`, account gclasercutting@gmail.com). If you ever need to change it:
 
 1. Create a free account at formspree.io and a new form pointed at gclasercutting@gmail.com.
 2. Copy the endpoint, e.g. `https://formspree.io/f/abcdwxyz`.
