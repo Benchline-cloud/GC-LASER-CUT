@@ -150,7 +150,7 @@ const noMetal = `<p class="aside">GC Laser Cut cuts timber, MDF, acrylic, PVC-fr
   body = body.replace(/<main id="top">\s*/, '').replace(/<\/main>\s*$/, '');
   body = localise(body).replace(/src="assets\//g, 'src="/assets/');
   const faq = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: SITE.faq.map(q => ({ '@type': 'Question', name: q[0], acceptedAnswer: { '@type': 'Answer', text: q[1] } })) };
-  write('index.html', layout({ title: 'Laser Cutting Coomera, Gold Coast | GC Laser Cut', desc: 'GC Laser Cut in Coomera QLD. 130 W CO2 laser cutting and engraving for MDF, acrylic, vinyl, leather, thin polycarbonate and timber. No metal. Quotes within 24 hours.', path: '/', body, schema: [business, faq] }));
+  write('index.html', layout({ title: 'Laser Cutting Coomera, Gold Coast | GC Laser Cut', desc: 'GC Laser Cut, Coomera. 130 W CO2 laser cutting and engraving for MDF, acrylic, vinyl, leather, thin polycarbonate and timber. No metal. Quotes in 24 hours.', path: '/', body, schema: [business, faq] }));
 }
 
 // ---------- simple pages ----------
@@ -179,8 +179,8 @@ for (const [slug, title, desc, pairs, lede] of [
   const src = C.pages.find(p => p.slug === slug).html;
   const inner = fix(src, pairs);
   const gallery = slug === 'layered-artwork'
-    ? ['g-clock', 'g-mandala', 'g-guitar', 'g-boho-mirror'].map(g => `<a class="work" href="/#work"><img src="/assets/${g}.jpg" alt="" loading="lazy"></a>`).join('')
-    : ['g-led', 'g-qr', 'g-lamp', 's-led'].map(g => `<a class="work" href="/#work"><img src="/assets/${g}.jpg" alt="" loading="lazy"></a>`).join('');
+    ? [['g-clock', 'Layered laser-cut clock'], ['g-mandala', 'Layered laser-cut mandala'], ['g-guitar', 'Layered laser-cut guitar artwork'], ['g-boho-mirror', 'Layered laser-cut boho mirror']].map(([g, alt]) => `<a class="work" href="/#work"><img src="/assets/${g}.jpg" alt="${alt}" loading="lazy"></a>`).join('')
+    : [['g-led', 'Round LED-lit Collingwood Football Club sign in a black timber frame'], ['g-qr', 'Acrylic QR code sign lit from a timber base'], ['g-lamp', 'Round engraved acrylic calligraphy lamp on a timber base, lit'], ['s-led', 'LED-lit engraved acrylic sign in a timber frame']].map(([g, alt]) => `<a class="work" href="/#work"><img src="/assets/${g}.jpg" alt="${alt}" loading="lazy"></a>`).join('');
   write(slug + '/index.html', layout({ title: title + ' | GC Laser Cut', desc, path: '/' + slug + '/', body: pageShell(title, lede, `<div class="work-grid four">${gallery}</div>` + inner + cta(), [['Home', '/'], ['Services', '/services/'], [title, '/' + slug + '/']]), schema: [crumbs([['Home', '/'], ['Services', '/services/'], [title, '/' + slug + '/']])] }));
 }
 
@@ -193,7 +193,7 @@ for (const [slug, title, desc, pairs, lede] of [
   <h2>What we do not do</h2>
   <p>We do not cut metal of any kind: no steel, stainless, aluminium, brass or copper. We also do not cut PVC, chlorinated vinyl, fibreglass, ABS or polycarbonate over 3 mm, because they are unsafe to laser or damage the machine. For those jobs we will happily point you to a local metal cutter or router shop.</p>
   <p>See <a href="/pricing/">pricing</a>, the <a href="/#materials">materials and thicknesses we cut</a>, and the <a href="/#faq">questions we get asked most</a>.</p>`;
-  write('services/index.html', layout({ title: 'Laser Cutting and Engraving Services | GC Laser Cut Coomera', desc: 'Laser cutting, engraving, stencils, layered artwork, 3D and LED signage, and file help from GC Laser Cut in Coomera. Timber, MDF, acrylic, vinyl, leather and thin polycarbonate. No metal.', path: '/services/', body: pageShell('Services', 'Cutting, engraving, stencils, layered artwork, signage and file help, all from one Coomera workshop.', inner + cta(), [['Home', '/'], ['Services', '/services/']]), schema: [crumbs([['Home', '/'], ['Services', '/services/']])] }));
+  write('services/index.html', layout({ title: 'Laser Cutting and Engraving Services | GC Laser Cut Coomera', desc: 'Laser cutting, engraving, stencils, layered artwork, 3D and LED signage and file help from GC Laser Cut, Coomera. Timber, MDF, acrylic, vinyl and leather.', path: '/services/', body: pageShell('Services', 'Cutting, engraving, stencils, layered artwork, signage and file help, all from one Coomera workshop.', inner + cta(), [['Home', '/'], ['Services', '/services/']]), schema: [crumbs([['Home', '/'], ['Services', '/services/']])] }));
 }
 
 // Pricing
@@ -202,7 +202,7 @@ for (const [slug, title, desc, pairs, lede] of [
   const inner = pricing.replace(/<h3>Examples from recent custom jobs<\/h3>/, '<h3>Examples from recent custom jobs</h3><p class="note" style="margin-top:.4rem">We do not sell ready-made products. Every price below was a one-off or small-batch custom job, shown so you can judge what a similar piece might cost.</p>') + `<h2>How a quote is worked out</h2>
   <p>Every quote is machine time plus material plus any setup. Machine time is what the laser actually spends cutting or engraving your file, so a simple outline in 3 mm MDF is quick and cheap, while a dense engraving or thick acrylic takes longer. We nest parts tightly to keep sheet waste down, and we tell you before starting if a change to the design would make it cheaper.</p>
   <p>Material is quoted separately at cost, or bring your own sheet as long as it is laser-safe. There is no minimum quantity. Shipping is at cost and confirmed in the quote.</p>`;
-  write('pricing/index.html', layout({ title: 'Laser Cutting Prices | GC Laser Cut Coomera', desc: 'Laser cutting from $65 per hour of machine time plus $20 setup for a new design. 10% off jobs over 10 hours. Example prices for stencils, signs, dog tags and mandalas.', path: '/pricing/', body: pageShell('Pricing', 'Simple hourly pricing, a one-off setup fee, and real examples from the shop.', inner + cta('Want a fixed price?', 'Send the file and the material and we will quote it within 24 hours.'), [['Home', '/'], ['Pricing', '/pricing/']]), schema: [crumbs([['Home', '/'], ['Pricing', '/pricing/']])] }));
+  write('pricing/index.html', layout({ title: 'Laser Cutting Prices | GC Laser Cut Coomera', desc: 'Laser cutting from $65 per hour of machine time plus $20 setup for a new design. 10% off jobs over 10 hours. Example prices for stencils, signs and dog tags.', path: '/pricing/', body: pageShell('Pricing', 'Simple hourly pricing, a one-off setup fee, and real examples from the shop.', inner + cta('Want a fixed price?', 'Send the file and the material and we will quote it within 24 hours.'), [['Home', '/'], ['Pricing', '/pricing/']]), schema: [crumbs([['Home', '/'], ['Pricing', '/pricing/']])] }));
 }
 
 // Contact
@@ -223,8 +223,9 @@ for (const [slug, title] of [['privacy-policy', 'Privacy Policy'], ['terms-and-c
 
 // ---------- blog ----------
 const posts = [...C.posts].sort((a, b) => b.date.localeCompare(a.date));
+const coverAlt = p => esc(p.seoTitle || p.title); // alt text for a post's cover image
 function postCard(p) {
-  return `<a class="guide" href="/${p.slug}/"><img src="${p.cover || '/assets/hero.jpg'}" alt="" width="720" height="450" loading="lazy"><div class="body"><time datetime="${p.date}">${fmtDate(p.date)}</time><strong>${esc(p.title)}</strong><span>${esc(p.desc.slice(0, 140))}${p.desc.length > 140 ? '…' : ''}</span></div></a>`;
+  return `<a class="guide" href="/${p.slug}/"><img src="${p.cover || '/assets/hero.jpg'}" alt="${coverAlt(p)}" width="720" height="450" loading="lazy"><div class="body"><time datetime="${p.date}">${fmtDate(p.date)}</time><strong>${esc(p.title)}</strong><span>${esc(p.desc.slice(0, 140))}${p.desc.length > 140 ? '…' : ''}</span></div></a>`;
 }
 function fmtDate(d) { const [y, m, dd] = d.split('-'); return `${Number(dd)} ${['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][Number(m) - 1]} ${y}`; }
 write('blog/index.html', layout({ title: 'Laser Cutting Guides and Blog | GC Laser Cut', desc: 'Guides on laser cutting acrylic, polycarbonate, vinyl, timber and stencils, plus gift ideas, from the GC Laser Cut workshop in Coomera.', path: '/blog/', body: `<section class="page"><div class="wrap">${breadcrumbHtml([['Home', '/'], ['Blog', '/blog/']])}<h1>Guides from the workshop</h1><p class="lede">What we have learned cutting these materials every day, written up for customers and makers.</p><div class="guide-grid" style="margin-top:2rem">${posts.map(postCard).join('')}</div></div></section>`, schema: [crumbs([['Home', '/'], ['Blog', '/blog/']])] }));
@@ -233,9 +234,9 @@ for (const p of posts) {
   html = html.replace(/^[\s\S]*?\d{1,2} \w+ \d{4}\s*/, ''); // strip breadcrumb, duplicated title, byline, date
   html = html.replace(/<h2>Post navigation<\/h2>[\s\S]*$/, '').replace(/<h2>Similar Posts<\/h2>[\s\S]*$/, '');
   const related = posts.filter(x => x.slug !== p.slug).sort(() => 0.5).slice(0, 3);
-  const body = `<article class="page"><div class="wrap narrow">${breadcrumbHtml([['Home', '/'], ['Blog', '/blog/'], [shortTitle(p.title), '/' + p.slug + '/']])}<h1>${esc(p.title)}</h1><p class="meta">By GC Laser Cut, Coomera · <time datetime="${p.date}">${fmtDate(p.date)}</time></p>${p.cover ? `<img class="cover" src="${p.cover}" alt="" width="1200" height="750">` : ''}${noMetal}<div class="prose">${html}</div>${cta()}<h2 class="related-h">More guides</h2><div class="guide-grid three">${related.map(postCard).join('')}</div></div></article>`;
+  const body = `<article class="page"><div class="wrap narrow">${breadcrumbHtml([['Home', '/'], ['Blog', '/blog/'], [shortTitle(p.title), '/' + p.slug + '/']])}<h1>${esc(p.title)}</h1><p class="meta">By GC Laser Cut, Coomera · <time datetime="${p.date}">${fmtDate(p.date)}</time></p>${p.cover ? `<img class="cover" src="${p.cover}" alt="${coverAlt(p)}" width="1200" height="750">` : ''}${noMetal}<div class="prose">${html}</div>${cta()}<h2 class="related-h">More guides</h2><div class="guide-grid three">${related.map(postCard).join('')}</div></div></article>`;
   const article = { '@context': 'https://schema.org', '@type': 'Article', headline: p.title, datePublished: p.date, dateModified: p.date, image: p.cover ? BASE + p.cover : undefined, author: { '@type': 'Organization', name: 'GC Laser Cut' }, publisher: { '@type': 'Organization', name: 'GC Laser Cut', logo: { '@type': 'ImageObject', url: BASE + '/assets/logo.png' } }, mainEntityOfPage: BASE + '/' + p.slug + '/' };
-  write(p.slug + '/index.html', layout({ title: p.title + ' | GC Laser Cut', desc: p.desc, path: '/' + p.slug + '/', body, image: p.cover, schema: [article, crumbs([['Home', '/'], ['Blog', '/blog/'], [shortTitle(p.title), '/' + p.slug + '/']])] }));
+  write(p.slug + '/index.html', layout({ title: (p.seoTitle || p.title) + ' | GC Laser Cut', desc: p.desc, path: '/' + p.slug + '/', body, image: p.cover, schema: [article, crumbs([['Home', '/'], ['Blog', '/blog/'], [shortTitle(p.title), '/' + p.slug + '/']])] }));
 }
 // redirect for the removed metal post
 write('iron-laser-cutting-designs/index.html', `<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=/#materials"><link rel="canonical" href="${BASE}/#materials"><meta name="robots" content="noindex"><title>Redirecting</title><p>This post has been removed. GC Laser Cut does not cut metal. <a href="/#materials">See the materials we cut</a>.</p>`);
